@@ -59,6 +59,20 @@ class CourseList extends Component {
 }
 
 
+
+class SearchBox extends Component {
+
+  
+
+}
+
+
+class SearchResults extends Component {
+  
+    
+}
+
+
 class Section extends Component {
   render() {
     return (
@@ -74,15 +88,6 @@ class Section extends Component {
     )
   }
 }
-
-
-
-class SearchResults extends Component {
-
-
-}
-
-
 
 
 class App extends Component {

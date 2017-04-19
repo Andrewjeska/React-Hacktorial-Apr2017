@@ -61,21 +61,6 @@ class CourseList extends Component {
 }
 
 
-class Section extends Component {
-  render() {
-    return (
-      <div className="section">
-        <h3> {this.props.section_num} </h3>
-        <p> {this.props.instructors} <br/></p>
-        <p> {this.props.meetings} <br/></p>
-        <p> Seats: {this.props.seats} <br/></p>
-        
-
-      </div>
-    )
-  }
-}
-
 
 
 class SearchBox extends Component {
@@ -83,7 +68,7 @@ class SearchBox extends Component {
   constructor(){
     super();
     this.state = {
-      course: ""
+      val: ""
 
     }
 
@@ -129,6 +114,20 @@ class SearchResults extends Component {
 }
 
 
+class Section extends Component {
+  render() {
+    return (
+      <div className="section">
+        <h3> {this.props.section_num} </h3>
+        <p> {this.props.instructors} <br/></p>
+        <p> {this.props.meetings} <br/></p>
+        <p> Seats: {this.props.seats} <br/></p>
+        
+
+      </div>
+    )
+  }
+}
 
 
 class App extends Component {

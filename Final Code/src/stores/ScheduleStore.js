@@ -31,7 +31,8 @@ class ScheduleStore {
   }
 
   handleUnenroll(index) {
-    this.enrolledSections.splice(index, 1);
+    var section = this.enrolledSections.splice(index, 1);
+    this.searchResults.splice(index, 0, section)
 
   }
  

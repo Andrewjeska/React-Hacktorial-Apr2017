@@ -49,7 +49,6 @@ class CourseList extends Component {
 
           </ul>
 
-          <h3> Total Credits: {this.state.credits} </h3>
         </div>
       );
     }
@@ -66,7 +65,7 @@ class CourseList extends Component {
                      instructors={this.state.sections[i].instructors}
                      meetings={this.state.sections[i].meetings}
                      seats={this.state.sections[i].seats}
-                     isEnrolled={false}
+                     isEnrolled={true}
                      index={i}/>
             )
         );
@@ -75,80 +74,11 @@ class CourseList extends Component {
 
       return sections
     }
-
-    
-
           
     
 }
 
 
-class Section extends Component {
-  constructor(){
-    super();
-    this.unenroll = this.unenroll.bind(this);
-    this.enroll = this.enroll.bind(this);
-    this.renderMeetings = this.renderMeetings.bind(this);
-
-  }
-  render() {
-    return (
-      <div className="section">
-        <h3> {this.props.section_num} </h3>
-        <p> {this.props.instructors} <br/></p>
-        {this.renderMeetings(this.props.meetings)}
-        <p> Seats: {this.props.seats} <br/></p>
-
-        {
-
-          this.props.isEnrolled ? 
-          <button onClick={this.unenroll} > Remove </button> : 
-          <button onClick={this.enroll}> Add </button>
-
-        }
-
-        
-
-      </div>
-    )
-  }
-
-  unenroll(){
-    ScheduleActions.unenrollSection(this.props.index);
-  }
-
-  enroll(){
-
-    ScheduleActions.enrollSection(this.props.index);
-
-  }
-
-  renderMeetings(arr){
-      //console.log(arr)
-
-      var meetings = [];
-
-      for(var i = 0; i < arr.length; i++){
-       
-        meetings.push(
-          React.createElement('div',
-            {},
-            <p>{arr[i].classtype} {arr[i].day} {arr[i].start_time} - {arr[i].end_time}</p>
-            
-          )
-
-        );
-
-      }
-
-      
-      //console.log(meetings)
-      return meetings;
-
-
-    }
-
-}
 
 
 
@@ -212,67 +142,131 @@ class SearchResults extends Component {
   }
 
 
-    componentDidMount() {
-      ScheduleStore.listen(this.onChange);
-    }
+  componentDidMount() {
+    ScheduleStore.listen(this.onChange);
+  }
 
-    componentWillUnmount() {
-      ScheduleStore.unlisten(this.onChange);
-    }
+  componentWillUnmount() {
+    ScheduleStore.unlisten(this.onChange);
+  }
 
-    onChange(state){
+  onChange(state){
 
-      this.setState({sections:state.searchResults})
+    this.setState({sections:state.searchResults})
 
-    }
+  }
 
 
 
-    render(){
+  render(){
 
-      const ul_style = {
+    const ul_style = {
 
-        "listStyle" : "none"
-      };
+      "listStyle" : "none"
+    };
 
-      return(
-        <div>
-          <ul style={ul_style}>
+    return(
+      <div>
+        <ul style={ul_style}>
 
-            {this.renderSections()}
+          {this.renderSections()}
 
-          </ul>
+        </ul>
 
-         
-        </div>
+       
+      </div>
+    );
+  }
+
+
+  renderSections(){
+    var sections = [];
+
+    for(var i = 0; i < this.state.sections.length; i++){
+      sections.push(
+        React.createElement('li',
+          {},
+          <Section section_num={this.state.sections[i].section_num}
+                   instructors={this.state.sections[i].instructors}
+                   meetings={this.state.sections[i].meetings}
+                   seats={this.state.sections[i].seats}
+                   isEnrolled={false}
+                   index={i}/>
+          )
       );
+
     }
 
-
-    renderSections(){
-      var sections = [];
-
-      for(var i = 0; i < this.state.sections.length; i++){
-        sections.push(
-          React.createElement('li',
-            {},
-            <Section section_num={this.state.sections[i].section_num}
-                     instructors={this.state.sections[i].instructors}
-                     meetings={this.state.sections[i].meetings}
-                     seats={this.state.sections[i].seats}
-                     isEnrolled={false}
-                     index={i}/>
-            )
-        );
-
-      }
-
-      return sections
-    }
+    return sections
+  }
 
     
 }
 
+
+class Section extends Component {
+  constructor(){
+    super();
+    this.unenroll = this.unenroll.bind(this);
+    this.enroll = this.enroll.bind(this);
+    this.renderMeetings = this.renderMeetings.bind(this);
+
+  }
+  render() {
+    return (
+      <div className="section">
+        <h3> {this.props.section_num} </h3>
+        <p> {this.props.instructors} <br/></p>
+        {this.renderMeetings(this.props.meetings)}
+        <p> Seats: {this.props.seats} <br/></p>
+
+        {
+
+          this.props.isEnrolled ? 
+          <button onClick={this.unenroll} > Remove </button> : 
+          <button onClick={this.enroll}> Add </button>
+
+        }
+
+        
+
+      </div>
+    )
+  }
+
+  unenroll(){
+    ScheduleActions.unenrollSection(this.props.index);
+  }
+
+  enroll(){
+
+    ScheduleActions.enrollSection(this.props.index);
+
+  }
+
+  renderMeetings(arr){
+      //console.log(arr)
+
+      var meetings = [];
+
+      for(var i = 0; i < arr.length; i++){
+       
+        meetings.push(
+          React.createElement('div',
+            {},
+            <p>{arr[i].classtype} {arr[i].day} {arr[i].start_time} - {arr[i].end_time}</p>
+            
+          )
+
+        );
+
+      }
+    
+      return meetings;
+
+    }
+
+}
 
 
 

@@ -9,9 +9,8 @@ class CourseList extends Component {
       super();
       this.state = {
           sections: [],
-         
+          
       };
-      //this.onChange = this.onChange.bind(this)
       this.renderSections = this.renderSections.bind(this)
 
     }
@@ -48,7 +47,7 @@ class CourseList extends Component {
                      instructors={this.state.sections[i].instructors}
                      meetings={this.state.sections[i].meetings}
                      seats={this.state.sections[i].seats}
-                     isEnrolled={true}/>
+                   />
             )
         );
 
@@ -61,27 +60,6 @@ class CourseList extends Component {
     
 }
 
-
-class Section extends Component {
-  render() {
-    return (
-      <div className="section">
-        <h3> {this.props.section_num} </h3>
-        <p> {this.props.instructors} <br/></p>
-        <p> {this.props.meetings} <br/></p>
-        <p> Seats: {this.props.seats} <br/></p>
-
-        {
-
-          this.props.isEnrolled ? null : <input button="input"> Add </input> 
-
-        }
-        
-
-      </div>
-    )
-  }
-}
 
 
 
@@ -105,7 +83,9 @@ class SearchBox extends Component {
   handleSubmit(event){
     event.preventDefault();
 
-    //then what? Flux!
+    //then what?
+
+    //We use flux!
   }
 
 
@@ -136,6 +116,20 @@ class SearchResults extends Component {
 }
 
 
+class Section extends Component {
+  render() {
+    return (
+      <div className="section">
+        <h3> {this.props.section_num} </h3>
+        <p> {this.props.instructors} <br/></p>
+        <p> {this.props.meetings} <br/></p>
+        <p> Seats: {this.props.seats} <br/></p>
+        
+
+      </div>
+    )
+  }
+}
 
 
 class App extends Component {
