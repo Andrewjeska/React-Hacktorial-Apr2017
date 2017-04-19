@@ -18,6 +18,32 @@
   font-size: large;
 }
 
+.enrolled {
+  float: left;
+  width: 50%;
+  /*border: 2px solid black;*/
+}
+
+.notEnrolled {
+  float: right;
+  width: 50%;
+  /*border: 2px solid black;*/
+}
+
+.notEnrolled > .section:first-child {
+  border: 2px solid black;
+}
+.section:nth-child(even) {
+  background-color: #f2f2f2 !important;
+}
+.section {
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

@@ -42,7 +42,7 @@ class CourseList extends Component {
       };
 
       return(
-        <div>
+        <div className="enrolled">
           <ul style={ul_style}>
 
             {this.renderSections()}
@@ -166,7 +166,7 @@ class SearchResults extends Component {
     };
 
     return(
-      <div>
+      <div className="notEnrolled">
         <ul style={ul_style}>
 
           {this.renderSections()}
@@ -274,9 +274,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        
-        <CourseList />
+
         <SearchBox />
+        <CourseList />
         <SearchResults />
         
       </div>
