@@ -9,6 +9,7 @@ class CourseList extends Component {
       sections: [],
 
     };
+
     this.renderSections = this.renderSections.bind( this )
 
   }
@@ -25,7 +26,7 @@ class CourseList extends Component {
       <ul style={ ul_style }>
         { this.renderSections() }
       </ul>
-      <h3>Total Credits: { this.state.credits }</h3>
+      
     </div>
     );
   }
@@ -38,7 +39,7 @@ class CourseList extends Component {
       sections.push(
         React.createElement( 'li',
           {},
-          <Section section_num={ this.state.sections[ i ].section_num }
+          <Section section_id={ this.state.sections[ i ].section_id }
                    instructors={ this.state.sections[ i ].instructors }
                    meetings={ this.state.sections[ i ].meetings }
                    seats={ this.state.sections[ i ].seats } />
@@ -74,7 +75,7 @@ class Section extends Component {
     return (
 
     <div>
-      <h3>{ this.props.section_num }</h3>
+      <h3>{ this.props.section_id }</h3>
       <p>
         { this.props.instructors }
         <br/>
@@ -97,7 +98,7 @@ class Section extends Component {
 class App extends Component {
   render() {
     return (
-    <div className="App">
+    <div >
       <CourseList />
     </div>
     );

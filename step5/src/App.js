@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 var ScheduleActions = require( './actions/ScheduleActions' );
-var ScheduleStore = require( './stores/ScheduleStore' );
+var ScheduleStore = require('./stores/ScheduleStore' );
 
 class CourseList extends Component {
   constructor() {
@@ -45,7 +45,7 @@ class CourseList extends Component {
 
     return (
     <div>
-      <ul style={ ul_style }>
+      <ul className="enrolled" style={ ul_style }>
         { this.renderSections() }
       </ul>
     </div>
@@ -60,7 +60,7 @@ class CourseList extends Component {
       sections.push(
         React.createElement( 'li',
           {},
-          <Section section_num={ this.state.sections[ i ].section_num }
+          <Section section_id={ this.state.sections[ i ].section_id }
                    instructors={ this.state.sections[ i ].instructors }
                    meetings={ this.state.sections[ i ].meetings }
                    seats={ this.state.sections[ i ].seats }
@@ -171,7 +171,7 @@ class SearchResults extends Component {
 
     return (
     <div>
-      <ul style={ ul_style }>
+      <ul className="notEnrolled" style={ ul_style }>
         { this.renderSections() }
       </ul>
     </div>
@@ -248,7 +248,7 @@ class Section extends Component {
   }
 
   renderMeetings( arr ) {
-    //console.log(arr)
+   
 
     var meetings = [];
 
@@ -282,7 +282,7 @@ class Section extends Component {
 class App extends Component {
   render() {
     return (
-    <div className="App">
+    <div >
       <CourseList />
       <SearchBox />
       <SearchResults />
