@@ -17,7 +17,7 @@ To verify that you have node and npm installed, run in a Terminal or Command Pro
 ``` 
 node -v
 npm -v
-
 ```
 
-Start from the "step1" folder. There are multiple ways to start a react project, so we're not going to bother talking about that. 
+Start from the "step1" folder. There are multiple ways to start a react project, so we're not going to talk much about that today.
+I've used "create-react-app" [Link](https://github.com/facebookincubator/create-react-app) 
