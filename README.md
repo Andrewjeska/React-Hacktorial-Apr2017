@@ -8,7 +8,7 @@ React is a popular frontend web framework used by companies such as Facebook and
 
 Today, we're going to build a schedule builder using umd.io
 
-## Installation
+## Setup
 
 Instructions on installing node and npm can be found [here](https://nodejs.org/en/download/package-manager/)  
 
@@ -19,5 +19,25 @@ node -v
 npm -v
 ```
 
-Start from the "step1" folder. There are multiple ways to start a react project, so we're not going to talk much about that today.
-I've used "create-react-app" [Link](https://github.com/facebookincubator/create-react-app) 
+Next, we're going to install create-react-app. There are many ways to start a react project, but this is the simplest.
+
+```
+npm install -g create-react-app
+```
+
+Then, in whatever directory you choose, create the project and enter it. 
+
+``` 
+create-react-app project_name
+cd project_name
+```
+
+To view the project in your default browser, run:
+
+```
+npm start
+```
+
+## Optional
+
+There's an extension for chrome called "React Developer Tools". It offers some more debugging info. [Install it here](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
