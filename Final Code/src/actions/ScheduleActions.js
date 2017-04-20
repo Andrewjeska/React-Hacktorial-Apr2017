@@ -1,59 +1,59 @@
-var alt = require('../alt');
-var SearchSource = require('../sources/SearchSource');
+var alt = require( '../alt' );
+var SearchSource = require( '../sources/SearchSource' );
 
 
 class ScheduleActions {
 
 
-  updateSearchResults(sections) {
+  updateSearchResults( sections ) {
     return sections;
   }
 
-  addEnrolledSection(index){
+  addEnrolledSection( index ) {
     return index;
   }
 
-  removeEnrolledSection(index){
+  removeEnrolledSection( index ) {
     return index;
   }
 
 
 
-  searchSections(courseId) {
+  searchSections( courseId ) {
     return (dispatch) => {
       dispatch();
 
-      SearchSource.searchForSections(courseId)
-          .then((response) => {
+      SearchSource.searchForSections( courseId )
+        .then( (response) => {
 
-            this.updateSearchResults(response);
-      })
+          this.updateSearchResults( response );
+        } )
 
-   }
-    
+    }
 
- }
 
-  enrollSection(index) {
+  }
+
+  enrollSection( index ) {
     return (dispatch) => {
       dispatch();
 
-      this.addEnrolledSection(index);
+      this.addEnrolledSection( index );
 
     }
 
   }
 
-  unenrollSection(index) {
+  unenrollSection( index ) {
     return (dispatch) => {
       dispatch();
 
-      this.removeEnrolledSection(index);
+      this.removeEnrolledSection( index );
     }
 
   }
-  
+
 
 }
 
-module.exports = alt.createActions(ScheduleActions);
+module.exports = alt.createActions( ScheduleActions );

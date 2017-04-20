@@ -2,80 +2,79 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-var ScheduleActions = require('./actions/ScheduleActions');
-var ScheduleStore = require('./stores/ScheduleStore');
+var ScheduleActions = require( './actions/ScheduleActions' );
+var ScheduleStore = require( './stores/ScheduleStore' );
 
 class CourseList extends Component {
   constructor() {
-      super();
-      this.state = {
-          sections: [],
-         
-      };
+    super();
+    this.state = {
+      sections: [],
 
-      this.renderSections = this.renderSections.bind(this);
-      this.onChange = this.onChange.bind(this)
+    };
 
-    }
+    this.renderSections = this.renderSections.bind( this );
+    this.onChange = this.onChange.bind( this )
 
-
-    componentDidMount() {
-      ScheduleStore.listen(this.onChange);
-    }
-
-    componentWillUnmount() {
-      ScheduleStore.unlisten(this.onChange);
-    }
-
-    onChange(state){
-      this.setState({sections:state.enrolledSections})
-
-    }
+  }
 
 
+  componentDidMount() {
+    ScheduleStore.listen( this.onChange );
+  }
 
-    render(){
+  componentWillUnmount() {
+    ScheduleStore.unlisten( this.onChange );
+  }
 
-      const ul_style = {
+  onChange( state ) {
+    this.setState( {
+      sections: state.enrolledSections
+    } )
 
-        "listStyle" : "none"
-      };
+  }
 
-      return(
-        <div className="enrolled">
-          <ul style={ul_style}>
 
-            {this.renderSections()}
 
-          </ul>
+  render() {
 
-        </div>
+    const ul_style = {
+
+      'listStyle': 'none'
+    };
+
+    return (
+    <div>
+      <ul className="enrolled" style={ ul_style }>
+        { this.renderSections() }
+      </ul>
+    </div>
+    );
+  }
+
+
+  renderSections() {
+    var sections = [];
+
+    for (var i = 0; i < this.state.sections.length; i++) {
+      sections.push(
+        React.createElement( 'li',
+          {},
+          <Section section_num={ this.state.sections[ i ].section_num }
+                   instructors={ this.state.sections[ i ].instructors }
+                   meetings={ this.state.sections[ i ].meetings }
+                   seats={ this.state.sections[ i ].seats }
+                   isEnrolled={ true }
+                   index={ i } />
+        )
       );
+
     }
 
+    return sections
+  }
 
-    renderSections(){
-      var sections = [];
 
-      for(var i = 0; i < this.state.sections.length; i++){
-        sections.push(
-          React.createElement('li',
-            {},
-            <Section section_num={this.state.sections[i].section_num}
-                     instructors={this.state.sections[i].instructors}
-                     meetings={this.state.sections[i].meetings}
-                     seats={this.state.sections[i].seats}
-                     isEnrolled={true}
-                     index={i}/>
-            )
-        );
-
-      }
-
-      return sections
-    }
-          
-    
 }
 
 
@@ -84,40 +83,43 @@ class CourseList extends Component {
 
 class SearchBox extends Component {
 
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      val: ""
+      val: ''
 
     }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind( this );
+    this.handleSubmit = this.handleSubmit.bind( this );
   }
 
-  handleChange(event){
-    this.setState({val: event.target.value.toUpperCase()});
+  handleChange( event ) {
+    this.setState( {
+      val: event.target.value.toUpperCase()
+    } );
   }
 
-  handleSubmit(event){
+  handleSubmit( event ) {
     event.preventDefault();
 
-    ScheduleActions.searchSections(this.state.val)
+    ScheduleActions.searchSections( this.state.val )
   }
 
 
-  render(){
-    return(
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Course Name:
-            <input type="text" value={this.state.val} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-
-      </div>
+  render() {
+    return (
+    <div>
+      <form onSubmit={ this.handleSubmit }>
+        <label>
+          Course Name:
+          <input type="text"
+                 value={ this.state.val }
+                 onChange={ this.handleChange } />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
 
 
     );
@@ -132,67 +134,65 @@ class SearchResults extends Component {
 
     super();
     this.state = {
-     sections:[]
+      sections: []
 
     }
-    this.onChange = this.onChange.bind(this);
-    this.renderSections = this.renderSections.bind(this);
-   
+    this.onChange = this.onChange.bind( this );
+    this.renderSections = this.renderSections.bind( this );
+
 
   }
 
 
   componentDidMount() {
-    ScheduleStore.listen(this.onChange);
+    ScheduleStore.listen( this.onChange );
   }
 
   componentWillUnmount() {
-    ScheduleStore.unlisten(this.onChange);
+    ScheduleStore.unlisten( this.onChange );
   }
 
-  onChange(state){
+  onChange( state ) {
 
-    this.setState({sections:state.searchResults})
+    this.setState( {
+      sections: state.searchResults
+    } )
 
   }
 
 
 
-  render(){
+  render() {
 
     const ul_style = {
 
-      "listStyle" : "none"
+      'listStyle': 'none'
     };
 
-    return(
-      <div className="notEnrolled">
-        <ul style={ul_style}>
-
-          {this.renderSections()}
-
-        </ul>
-
-       
-      </div>
+    return (
+    <div>
+      <ul className="notEnrolled" style={ ul_style }>
+        { this.renderSections() }
+      </ul>
+    </div>
     );
   }
 
 
-  renderSections(){
+  renderSections() {
     var sections = [];
 
-    for(var i = 0; i < this.state.sections.length; i++){
+    for (var i = 0; i < this.state.sections.length; i++) {
       sections.push(
-        React.createElement('li',
+        React.createElement( 'li',
           {},
-          <Section section_num={this.state.sections[i].section_num}
-                   instructors={this.state.sections[i].instructors}
-                   meetings={this.state.sections[i].meetings}
-                   seats={this.state.sections[i].seats}
-                   isEnrolled={false}
-                   index={i}/>
-          )
+          <Section section_num={ this.state.sections[ i ].section_num }
+                   instructors={ this.state.sections[ i ].instructors }
+                   meetings={ this.state.sections[ i ].meetings }
+                   seats={ this.state.sections[ i ].seats }
+                   isEnrolled={ false }
+                   index={ i } />
+        )
       );
 
     }
@@ -200,71 +200,79 @@ class SearchResults extends Component {
     return sections
   }
 
-    
+
 }
 
 
 class Section extends Component {
-  constructor(){
+  constructor() {
     super();
-    this.unenroll = this.unenroll.bind(this);
-    this.enroll = this.enroll.bind(this);
-    this.renderMeetings = this.renderMeetings.bind(this);
+    this.unenroll = this.unenroll.bind( this );
+    this.enroll = this.enroll.bind( this );
+    this.renderMeetings = this.renderMeetings.bind( this );
 
   }
   render() {
     return (
-      <div className="section">
-        <h3> {this.props.section_num} </h3>
-        <p> {this.props.instructors} <br/></p>
-        {this.renderMeetings(this.props.meetings)}
-        <p> Seats: {this.props.seats} <br/></p>
-
-        {
-
-          this.props.isEnrolled ? 
-          <button onClick={this.unenroll} > Remove </button> : 
-          <button onClick={this.enroll}> Add </button>
-
-        }
-
-        
-
-      </div>
+    <div className="section">
+      <h3>{ this.props.section_num }</h3>
+      <p>
+        { this.props.instructors }
+        <br/>
+      </p>
+      { this.renderMeetings( this.props.meetings ) }
+      <p>
+        Seats:
+        { this.props.seats }
+        <br/>
+      </p>
+      { this.props.isEnrolled ?
+          <button onClick={ this.unenroll }>
+            Remove
+          </button> :
+          <button onClick={ this.enroll }>
+            Add
+          </button> }
+    </div>
     )
   }
 
-  unenroll(){
-    ScheduleActions.unenrollSection(this.props.index);
+  unenroll() {
+    ScheduleActions.unenrollSection( this.props.index );
   }
 
-  enroll(){
+  enroll() {
 
-    ScheduleActions.enrollSection(this.props.index);
+    ScheduleActions.enrollSection( this.props.index );
 
   }
 
-  renderMeetings(arr){
-      //console.log(arr)
+  renderMeetings( arr ) {
+    //console.log(arr)
 
-      var meetings = [];
+    var meetings = [];
 
-      for(var i = 0; i < arr.length; i++){
-       
-        meetings.push(
-          React.createElement('div',
-            {},
-            <p>{arr[i].classtype} {arr[i].day} {arr[i].start_time} - {arr[i].end_time}</p>
-            
-          )
+    for (var i = 0; i < arr.length; i++) {
 
-        );
+      meetings.push(
+        React.createElement( 'div',
+          {},
+          <p>
+            { arr[ i ].classtype }
+            { arr[ i ].day }
+            { arr[ i ].start_time } -
+            { arr[ i ].end_time }
+          </p>
 
-      }
-    
-      return meetings;
+        )
+
+      );
 
     }
+
+    return meetings;
+
+  }
 
 }
 
@@ -273,13 +281,11 @@ class Section extends Component {
 class App extends Component {
   render() {
     return (
-      <div className="App">
-
-        <SearchBox />
-        <CourseList />
-        <SearchResults />
-        
-      </div>
+    <div className="App">
+      <SearchBox />
+      <CourseList />
+      <SearchResults />
+    </div>
     );
   }
 }

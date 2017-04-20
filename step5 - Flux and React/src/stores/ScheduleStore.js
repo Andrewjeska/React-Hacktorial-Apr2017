@@ -1,5 +1,5 @@
-var alt = require('../alt');
-var ScheduleActions = require('../actions/ScheduleActions');
+var alt = require( '../alt' );
+var ScheduleActions = require( '../actions/ScheduleActions' );
 
 
 class ScheduleStore {
@@ -7,35 +7,40 @@ class ScheduleStore {
   constructor() {
 
     this.searchResults = [];
+    this.currCourse = '';
     this.enrolledSections = [];
-    
 
-    this.bindListeners({
+
+    this.bindListeners( {
       handleSearch: ScheduleActions.updateSearchResults,
       handleEnroll: ScheduleActions.addEnrolledSection,
       handleUnenroll: ScheduleActions.removeEnrolledSection
 
-    });
+    } );
   }
 
-  handleSearch(response) {
+  handleSearch( response ) {
 
-   this.searchResults = response;
-   
-  }
-
-  handleEnroll(index) {
-    var section = this.searchResults.splice(index, 1)[0];
-    this.enrolledSections.push(section);
-    
-  }
-
-  handleUnenroll(index) {
-    var section = this.enrolledSections.splice(index, 1);
-    this.searchResults.splice(index, 0, section)
+    this.searchResults = response;
+    this.currCourse = response[ 0 ].course;
 
   }
- 
+
+  handleEnroll( index ) {
+    var section = this.searchResults.splice( index, 1 )[ 0 ];
+    this.enrolledSections.push( section );
+
+  }
+
+  handleUnenroll( index ) {
+    var section = this.enrolledSections.splice( index, 1 )[ 0 ];
+    if ( section.course_id === this.currCourse )
+      this.searchResults.splice( index, 0, section );
+
+
+
+  }
+
 }
 
-module.exports = alt.createStore(ScheduleStore, 'ScheduleStore');
+module.exports = alt.createStore( ScheduleStore, 'ScheduleStore' );

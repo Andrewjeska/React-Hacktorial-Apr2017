@@ -1,51 +1,29 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
 .enrolled {
   float: left;
-  width: 50%;
-  /*border: 2px solid black;*/
+  width: 40%;
+  /* border: 2px solid black;*/
 }
 
 .notEnrolled {
   float: right;
-  width: 50%;
+  width: 40%;
   /*border: 2px solid black;*/
 }
 
-.notEnrolled > .section:first-child {
+.notEnrolled > li {
   border: 2px solid black;
 }
-.section:nth-child(even) {
-  background-color: #f2f2f2 !important;
+
+.enrolled > li {
+  border: 2px solid red;
 }
-.section {
-  border-right: 2px solid black;
-  border-left: 2px solid black;
-  border-bottom: 2px solid black;
+
+
+li {
+  margin-bottom: 2%;
+  margin-top: 2%;
 }
 
 
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
 

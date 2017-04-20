@@ -4,27 +4,27 @@ import './App.css';
 
 
 class CourseList extends Component {
-  
-              
+
+
 }
 
 
 
 class SearchBox extends Component {
 
-  
+
 
 }
 
 
 class SearchResults extends Component {
-  
-    
+
+
 }
 
 
 class Section extends Component {
-  
+
 
 }
 
